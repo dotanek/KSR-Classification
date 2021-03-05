@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Klasyfikacja.iml" filepath="$PROJECT_DIR$/Klasyfikacja.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Classification.iml" filepath="$PROJECT_DIR$/Classification.iml" />
     </modules>
   </component>
 </project>
