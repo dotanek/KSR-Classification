@@ -1,16 +1,24 @@
 package krs.mkpr.Extraction;
 
+import krs.mkpr.Keywords;
+
 import java.util.List;
 
 public class Article {
     private String title;
-    private String text;
+    public String text;
+    private String dateline;
+    private String country;
 
-    public Article() {}
+    public Article() {
+        Keywords keywords = new Keywords();
+    }
 
-    public Article(String title, String text) {
+    public Article(String title, String text, String dateline, String country) {
         this.title = title;
         this.text = text;
+        this.dateline = dateline;
+        this.country = country;
     }
 
     public String getTitle() {
@@ -31,10 +39,13 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Article{" +
+        /*return "Article{" +
                 "title='" + title + '\'' +
                 ", text='" + text + '\'' +
-                '}';
+                ", dateline='" + dateline + '\'' +
+                ", country='" + country + '\'' +
+                '}';*/
+        return "{country='"+ country + "'}";
     }
 }
 
