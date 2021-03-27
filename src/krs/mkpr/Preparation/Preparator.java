@@ -33,7 +33,7 @@ public class Preparator {
         text = filter(text);
         text = stem(text);
 
-        String datelineString = article.getDateline().split("\\,")[0];
+        String datelineString = article.getDateline().split("\\,")[0]; // Getting part of string before comma.
         List<String> dateline = Arrays.asList(clean(datelineString).split("\\s"));
         dateline = filter(dateline);
         dateline = stem(dateline);

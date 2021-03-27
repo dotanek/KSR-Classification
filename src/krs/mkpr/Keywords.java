@@ -16,10 +16,6 @@ public class Keywords {
     public List<String> continents;
     private final PorterStemmer stemmer = new PorterStemmer();
 
-    public Keywords() {
-
-    }
-
     public List<String> getAll() {
         List<String> all = new ArrayList<>();
         all.addAll(general);
@@ -35,18 +31,6 @@ public class Keywords {
         this.continents = loadFromFile(dirPath+"\\continents.txt");
         this.currencies = loadFromFile(dirPath+"\\currencies.txt");
     }
-
-    /*private List<String> alternateLoadFromFiles(String filePath) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File(filePath));
-
-        List<String> keywords = new ArrayList<String>();
-
-        while (scanner.hasNextLine()) {
-            keywords.add(scanner.nextLine().toLowerCase(Locale.ROOT));
-        }
-
-        return keywords;
-    }*/
 
     private List<String> loadFromFile(String filePath) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(filePath));

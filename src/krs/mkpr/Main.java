@@ -17,10 +17,12 @@ public class Main {
             long startTime;
             long endTime;
 
+            String dataPath = System.getProperty("user.dir") + "\\..\\..\\..\\data"; // Modify the string so that it points to the correct directory.
+
             startTime = System.nanoTime();
             System.out.print("Loading articles... ");
-            String dataPath = System.getProperty("user.dir") + "\\..\\..\\..\\data"; // Modify the string so that it points to the correct directory.
-            List<Article> articles = ArticleLoader.loadFromFile(dataPath+"\\documents\\reut2-000.sgm");
+            List<Article> articles = ArticleLoader.loadFromFile(dataPath+"\\documents");
+            //List<Article> articles = ArticleLoader.loadFromFile(dataPath+"\\documents\\reut2-000.sgm"); Uncomment for single file.
             endTime = System.nanoTime();
             System.out.println("execution time: "+((endTime - startTime) * 10e-10));
 
