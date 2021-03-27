@@ -1,65 +1,84 @@
 package krs.mkpr.Preparation;
 
-import krs.mkpr.Extraction.Article;
 import org.tartarus.snowball.ext.PorterStemmer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Preparator {
-    public List<String> stopList;
+    private List<String> stopList;
+    private final PorterStemmer stemmer = new PorterStemmer();
 
     public Preparator() {}
 
     public void loadFromFile(String filePath) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(filePath));
 
-        stopList = new ArrayList<String>();
+        stopList = new ArrayList<>();
 
         while (scanner.hasNextLine()) {
             stopList.add(scanner.nextLine());
         }
 
-        stopList.add("reuter3"); // Weird word at the end of each text.
+        stopList.add("reuter"); // Weird word at the end of each text.
     }
 
     public void prepare(Article article) {
-        clean(article);
-        filter(article);
-        stem(article);
+        List<String> title = Arrays.asList(clean(article.getTitle()).split("\\s"));
+        title = filter(title);
+        title = stem(title);
+
+        List<String> text = Arrays.asList(clean(article.getText()).split("\\s"));
+        text = filter(text);
+        text = stem(text);
+
+        String datelineString = article.getDateline().split("\\,")[0];
+        List<String> dateline = Arrays.asList(clean(datelineString).split("\\s"));
+        dateline = filter(dateline);
+        dateline = stem(dateline);
+
+        article.setTitle(String.join(" ", title));
+        article.setText(String.join(" ", text));
+        article.setDateline(String.join(" ", dateline));
     }
 
-    private void filter(Article article) {
-        String[] splitText = article.text.split(" ");
-        article.text = "";
-        for (String word : splitText) {
+    public void prepare(List<Article> articles) {
+        for (Article article : articles) {
+            prepare(article);
+        }
+    }
+
+    private List<String> filter(List<String> text) {
+        List<String> filteredText = new ArrayList<>();
+        for (String word : text) {
             if (!stopList.contains(word)) {
-                article.text += word + " ";
+                filteredText.add(word);
             }
         }
-        article.text.trim();
+        return filteredText;
     }
 
-    private void stem(Article article) {
-        String[] splitText = article.text.split(" ");
-        article.text = "";
-
-        PorterStemmer stemmer = new PorterStemmer();
-
-        for (String word : splitText) {
+    private List<String> stem(List<String> text) {
+        List<String> stemmedText = new ArrayList<>();
+        for (String word : text) {
             stemmer.setCurrent(word);
             stemmer.stem();
-            article.text += stemmer.getCurrent() + " ";
+            stemmedText.add(stemmer.getCurrent());
         }
-        article.text.trim();
+        return stemmedText;
     }
 
-    private void clean(Article article) {
-        article.text = article.text.replaceAll("[^A-Za-z ]", ""); // Removing all special characters.
-        article.text = article.text.replaceAll("( )+", " "); // Replacing triple spaces with single spaces.
+    private String clean(String text) {
+        return text
+            .toLowerCase(Locale.ROOT) // Converting to lower case.
+            .replaceAll("\\d+[,.]\\d+", " ") // Removing all numbers with dots or commas.
+            .replaceAll("u\\.s\\.", "us") // Special case - removing dots from U.S.
+            .replaceAll("u\\.k\\.", "uk") // Special case - removing dots from U.K.
+            .replaceAll("[.]", " .") // Separating dots from the words.
+            .replaceAll("[^A-Za-z .]", " ") // Removing all special characters and numbers.
+            .replaceAll("( )+", " ") // Replacing triple spaces with single spaces.
+            .trim(); // Removing extra whitespaces at the ends.
     }
 }
 

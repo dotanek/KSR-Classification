@@ -1,4 +1,4 @@
-package krs.mkpr.Extraction;
+package krs.mkpr.Preparation;
 
 import java.io.File;
 
@@ -61,7 +61,7 @@ public class ArticleLoader {
                 articleString = line;
                 while (scanner.hasNextLine()) {
                     line = scanner.nextLine();
-                    articleString += line;
+                    articleString += " " + line;
                     if (line.contains("</REUTERS>")) {
                         try {
                             articles.add(parseArticleString(articleString));

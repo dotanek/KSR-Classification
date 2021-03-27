@@ -1,4 +1,4 @@
-package krs.mkpr.Extraction;
+package krs.mkpr.Preparation;
 
 import krs.mkpr.Keywords;
 
@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Article {
     private String title;
-    public String text;
+    private String text;
     private String dateline;
     private String country;
 
@@ -37,15 +37,30 @@ public class Article {
         this.text = text;
     }
 
+    public String getDateline() {
+        return dateline;
+    }
+
+    public void setDateline(String dateline) {
+        this.dateline = dateline;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     @Override
     public String toString() {
-        /*return "Article{" +
+        return "Article{" +
                 "title='" + title + '\'' +
                 ", text='" + text + '\'' +
                 ", dateline='" + dateline + '\'' +
                 ", country='" + country + '\'' +
-                '}';*/
-        return "{country='"+ country + "'}";
+                '}';
     }
 }
 
