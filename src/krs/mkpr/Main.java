@@ -5,8 +5,9 @@ import krs.mkpr.Extraction.Extractor;
 import krs.mkpr.Preparation.Article;
 import krs.mkpr.Preparation.ArticleLoader;
 import krs.mkpr.Preparation.Preparator;
-import org.apache.commons.lang3.StringUtils;
+// import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.util.List;
 
 public class Main {
@@ -17,11 +18,18 @@ public class Main {
             long startTime;
             long endTime;
 
-            String dataPath = System.getProperty("user.dir") + "\\..\\..\\..\\data"; // Modify the string so that it points to the correct directory.
+            String slash = File.separator;
+            String currentDir = System.getProperty("user.dir");
+            String mainDirName = "KSR-Classification";
+            String dataPath = currentDir;
+            if (currentDir.contains(mainDirName + slash)) {
+                dataPath += slash + ".." + slash + ".." + slash + "..";
+            }
+            dataPath += slash + "data";
 
             startTime = System.nanoTime();
             System.out.print("Loading articles... ");
-            List<Article> articles = ArticleLoader.loadFromFile(dataPath+"\\documents");
+            List<Article> articles = ArticleLoader.loadFromFiles(dataPath+"\\documents");
             //List<Article> articles = ArticleLoader.loadFromFile(dataPath+"\\documents\\reut2-000.sgm"); Uncomment for single file.
             endTime = System.nanoTime();
             System.out.println("execution time: "+((endTime - startTime) * 10e-10));
