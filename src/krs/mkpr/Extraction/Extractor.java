@@ -42,8 +42,8 @@ public class Extractor {
         int sentencesAmount = text.split("\\.").length;
         int uniqieWordsAmount = new HashSet<>(Arrays.asList(text.split(" "))).size();
 
-        properties.add(wordsAmount); // 1. Amount of words in the text.
-        properties.add(uniqieWordsAmount); // 8. Amount of unique words in text.
+        //properties.add(wordsAmount); // 1. Amount of words in the text.
+        //properties.add(uniqieWordsAmount); // 8. Amount of unique words in text.
         properties.add(wordsAmount/sentencesAmount); // 10. Average amount of words in the text sentence.
     }
 

@@ -18,7 +18,7 @@ public class ArticleLoader {
     private static final Pattern PLACES_REGEX = Pattern.compile("<PLACES>(.+?)</PLACES>", Pattern.DOTALL);
     private static final Pattern D_REGEX = Pattern.compile("<D>(.+?)</D>", Pattern.DOTALL);
 
-    private static final List<String> TARGET_PLACES = Arrays.asList(
+    public static final List<String> TARGET_PLACES = Arrays.asList(
             new String[]{"west-germany", "usa", "france", "uk", "canada", "japan"}
     );
 
@@ -94,7 +94,7 @@ public class ArticleLoader {
             title = titleLookup.get(0);
             text = textLookup.get(0);
             dateline = datelineLookup.get(0);
-            place = placeLookup.toString();
+            place = placeLookup.toString().replace("[","").replace("]","");
         }
         return new Article(title,text,dateline,place);
     }
