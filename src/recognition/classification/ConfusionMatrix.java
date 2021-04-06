@@ -76,7 +76,7 @@ public class ConfusionMatrix {
         int population = 0;
 
         for (int i = 0; i < matrix.length; i++) {
-            population += matrix[classIndex][i];
+            population += matrix[i][classIndex];
         }
 
         if (population == 0) {
@@ -96,7 +96,7 @@ public class ConfusionMatrix {
         int population = 0;
 
         for (int i = 0; i < matrix.length; i++) {
-            population += matrix[i][classIndex];
+            population += matrix[classIndex][i];
         }
 
         if (population == 0) {

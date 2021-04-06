@@ -116,12 +116,8 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Label layoutX="284.0" layoutY="115.0" prefHeight="25.0" prefWidth="63.0" text="Celność:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="label_accuracy" layoutX="347.0" layoutY="115.0" prefHeight="23.0" prefWidth="136.0" text="[nieokreślona]" />
+      <Label layoutX="284.0" layoutY="115.0" prefHeight="25.0" prefWidth="49.0" text="Celność:" />
+      <Label fx:id="label_accuracy" layoutX="333.0" layoutY="115.0" prefHeight="23.0" prefWidth="67.0" text="[brak]" />
       <GridPane fx:id="grid_quality" alignment="CENTER" layoutX="284.0" layoutY="148.0" prefHeight="93.0" prefWidth="441.0" style="-fx-border-color: black;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="-Infinity" prefWidth="57.0" />
@@ -188,5 +184,11 @@
             <String fx:value="Euklidesowa" />
          </value>
       </ComboBox>
+      <Label layoutX="401.0" layoutY="115.0" prefHeight="25.0" prefWidth="49.0" text="Precyzja:" />
+      <Label fx:id="label_precision" layoutX="450.0" layoutY="115.0" prefHeight="23.0" prefWidth="67.0" text="[brak]" />
+      <Label layoutX="524.0" layoutY="115.0" prefHeight="25.0" prefWidth="49.0" text="Czułość:" />
+      <Label fx:id="label_recall" layoutX="572.0" layoutY="115.0" prefHeight="23.0" prefWidth="68.0" text="[brak]" />
+      <Label layoutX="645.0" layoutY="115.0" prefHeight="25.0" prefWidth="17.0" text="F1:" />
+      <Label fx:id="label_f1" layoutX="663.0" layoutY="115.0" prefHeight="23.0" prefWidth="65.0" text="[brak]" />
    </children>
 </AnchorPane>

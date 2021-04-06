@@ -38,6 +38,9 @@ public class Controller implements Initializable {
     public Label label_prepare;
     public Label label_classify;
     public Label label_accuracy;
+    public Label label_precision;
+    public Label label_recall;
+    public Label label_f1;
 
     public RadioButton label_property1;
     public RadioButton label_property2;
@@ -220,11 +223,17 @@ public class Controller implements Initializable {
                 grid_quality.add(recallLabel,0,2);
                 grid_quality.add(f1Label,0,3);
 
+                double overall_precision = 0.0;
+                double overall_recall = 0.0;
+                double overall_f1 = 0.0;
+
                 for (int i = 1; i < 7; i++) {
                     String className = classNames.get(i-1);
                     double precision = confusionMatrix.getPrecision(className);
+                    overall_precision += precision;
                     precision = Math.round(precision * 1000) / 1000.0;
                     double recall = confusionMatrix.getRecall(className);
+                    overall_recall += recall;
                     recall = Math.round(recall * 1000) / 1000.0;
                     double f1 = confusionMatrix.getF1(className);
                     f1 = Math.round(f1 * 1000) / 1000.0;
@@ -248,6 +257,18 @@ public class Controller implements Initializable {
                     grid_quality.add(temp2,i,2);
                     grid_quality.add(temp3,i,3);
                 }
+
+                overall_precision = overall_precision / classNames.size();
+                overall_recall = overall_recall / classNames.size();
+                overall_f1 = 2 * overall_precision * overall_recall / (overall_precision + overall_recall);
+
+                overall_precision = Math.round(overall_precision * 1000) / 1000.0;
+                overall_recall = Math.round(overall_recall * 1000) / 1000.0;
+                overall_f1 = Math.round(overall_f1 * 1000) / 1000.0;
+
+                label_precision.setText(Double.toString(overall_precision));
+                label_recall.setText(Double.toString(overall_recall));
+                label_f1.setText(Double.toString(overall_f1));
 
 
                 for (int i = 1; i < 7; i++) {
